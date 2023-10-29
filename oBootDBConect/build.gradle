@@ -1,0 +1,32 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.16'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.oracle'
+version = 'version1.0'
+
+java {
+	sourceCompatibility = '11'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	//뷰단에 사용하기 위한 것
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//starter-web은 mvc모델 개발을 위해 필요한 것
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+	//여태 ojdbc6.jar 썼지만 버전 높아도 상관 없이 알아서 매칭됨
+	//이렇게 설정만 해놓으면 자동으로 쓸 수 있어서 스프링부트가 레거시보다 편함
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
